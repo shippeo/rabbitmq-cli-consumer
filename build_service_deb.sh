@@ -139,8 +139,8 @@ build_package () {
     mkdir ~/gocode
   fi
   export GOPATH=~/gocode
-  go get github.com/ricbra/rabbitmq-cli-consumer
-  go build github.com/ricbra/rabbitmq-cli-consumer
+  go get github.com/shippeo/rabbitmq-cli-consumer
+  go build github.com/shippeo/rabbitmq-cli-consumer
   mv rabbitmq-cli-consumer /tmp/deb/usr/bin/$service_name
   VERSION=`/tmp/deb/usr/bin/$service_name --version|awk '{print $3}'`
   fpm -s dir -t deb -C /tmp/deb --force --name $service_name --version $VERSION --description "Consumes RabbitMQ messages into cli program" --config-files etc/$service_name.conf

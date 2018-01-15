@@ -1,6 +1,9 @@
 RabbitMQ cli consumer
 ---------------------
 
+This repository is forked from [rabbitmq-cli-consumer](https://github.com/ricbra/rabbitmq-cli-consumer) a work done
+by [Richard van den Brand](https://github.com/ricbra), an official fork exist [here](https://github.com/corvus-ch/rabbitmq-cli-consumer).
+
 If you are a fellow PHP developer just like me you're probably aware of the following fact:
 PHP really SUCKS in long running tasks.
 
@@ -13,39 +16,28 @@ a language as Go which is much better suited to run long running tasks.
 
 # Installation
 
-You have the choice to either compile yourself or by installing via package or binary.
-
-## APT Package
-
-As I'm a Debian user myself Debian-based peeps are lucky and can use my APT repository.
-
-Add this line to your <code>/etc/apt/sources.list</code> file:
-
-    deb http://apt.vandenbrand.org/debian testing main
-
-Fetch and install GPG key:
-
-    $ wget http://apt.vandenbrand.org/apt.vandenbrand.org.gpg.key
-    $ sudo apt-key add apt.vandenbrand.org.gpg.key
-
-Update and install:
-
-    $ sudo apt-get update
-    $ sudo apt-get install rabbitmq-cli-consumer
-
-## Create .deb package for service install
-
-    sudo apt-get install golang gccgo-go ruby -y
-    # Ubuntu
-    sudo apt-get install gccgo-go -y
-    # Debian
-    sudo apt-get install gccgo -y
-    sudo gem install fpm
-    ./build_service_deb.sh
+You have the choice to either compile yourself or using docker.
 
 ## Binary
 
-Binaries can be found at: https://github.com/ricbra/rabbitmq-cli-consumer/releases
+Binaries can be found at: not implemented yet !
+
+## Compiling with docker
+
+This section assume you have docker and docker-compose installed.
+
+Build your docker image :
+
+``` bash
+$ docker-compose build
+```
+
+Compile :
+
+```bash
+$ docker-compose run consumer go build -tags netgo
+```
+
 
 ## Compiling
 
@@ -54,13 +46,13 @@ This section assumes you're familiar with the Go language.
 Use <code>go get</code> to get the source local:
 
 ```bash
-$ go get github.com/ricbra/rabbitmq-cli-consumer
+$ go get github.com/shippeo/rabbitmq-cli-consumer
 ```
 
 Change to the directory, e.g.:
 
 ```bash
-$ cd $GOPATH/src/github.com/ricbra/rabbitmq-cli-consumer
+$ cd $GOPATH/src/github.com/shippeo/rabbitmq-cli-consumer
 ```
 
 Get the dependencies:

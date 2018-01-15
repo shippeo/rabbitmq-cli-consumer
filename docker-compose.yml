@@ -1,7 +1,7 @@
 version: '2'
 services:
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "15672:15672"
-      - "5672:5672"
+    consumer:
+        build: docker/consumer
+        volumes:
+            - .:/go/src/github.com/shippeo/rabbitmq-cli-consumer
+        working_dir: /go/src/github.com/shippeo/rabbitmq-cli-consumer

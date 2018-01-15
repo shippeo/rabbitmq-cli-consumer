@@ -12,8 +12,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/ricbra/rabbitmq-cli-consumer/command"
-	"github.com/ricbra/rabbitmq-cli-consumer/config"
+	"github.com/shippeo/rabbitmq-cli-consumer/command"
+	"github.com/shippeo/rabbitmq-cli-consumer/config"
 	"github.com/streadway/amqp"
 )
 
