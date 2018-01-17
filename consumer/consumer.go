@@ -298,6 +298,10 @@ func sanitizeQueueArgs(cfg *config.Config) amqp.Table {
 		}
 	}
 
+	if cfg.QueueSettings.Priority > 0 {
+		args["x-max-priority"] = int32(cfg.QueueSettings.Priority)
+	}
+
 	if len(args) > 0 {
 		return args
 	}

@@ -26,6 +26,7 @@ type Config struct {
 		MessageTTL           int
 		DeadLetterExchange   string
 		DeadLetterRoutingKey string
+		Priority             int
 	}
 	Exchange struct {
 		Name       string
