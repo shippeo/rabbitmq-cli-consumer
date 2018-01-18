@@ -12,8 +12,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/ricbra/rabbitmq-cli-consumer/command"
-	"github.com/ricbra/rabbitmq-cli-consumer/config"
+	"github.com/shippeo/rabbitmq-cli-consumer/command"
+	"github.com/shippeo/rabbitmq-cli-consumer/config"
 	"github.com/streadway/amqp"
 )
 
@@ -262,11 +262,14 @@ func New(cfg *config.Config, factory *command.CommandFactory, errLogger, infLogg
 
 		// Bind queue
 		infLogger.Printf("Binding queue \"%s\" to exchange \"%s\"...", cfg.RabbitMq.Queue, cfg.Exchange.Name)
-		err = ch.QueueBind(cfg.RabbitMq.Queue, transformToStringValue(cfg.QueueSettings.Routingkey), transformToStringValue(cfg.Exchange.Name), false, nil)
+		for i := 0; i < len(cfg.QueueSettings.Routingkey); i++ {
+			err = ch.QueueBind(cfg.RabbitMq.Queue, transformToStringValue(cfg.QueueSettings.Routingkey[1]), transformToStringValue(cfg.Exchange.Name), false, nil)
 
-		if nil != err {
-			return nil, errors.New(fmt.Sprintf("Failed to bind queue to exchange: %s", err.Error()))
+			if nil != err {
+				return nil, errors.New(fmt.Sprintf("Failed to bind queue to exchange: %s", err.Error()))
+			}
 		}
+
 	}
 
 	return &Consumer{
@@ -296,6 +299,10 @@ func sanitizeQueueArgs(cfg *config.Config) amqp.Table {
 		if cfg.QueueSettings.DeadLetterRoutingKey != "" {
 			args["x-dead-letter-routing-key"] = transformToStringValue(cfg.QueueSettings.DeadLetterRoutingKey)
 		}
+	}
+
+	if cfg.QueueSettings.Priority > 0 {
+		args["x-max-priority"] = int32(cfg.QueueSettings.Priority)
 	}
 
 	if len(args) > 0 {
