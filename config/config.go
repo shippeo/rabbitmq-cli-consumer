@@ -22,7 +22,7 @@ type Config struct {
 		Global bool
 	}
 	QueueSettings struct {
-		Routingkey           string
+		Routingkey           []string
 		MessageTTL           int
 		DeadLetterExchange   string
 		DeadLetterRoutingKey string
